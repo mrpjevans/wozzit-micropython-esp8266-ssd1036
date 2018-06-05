@@ -7,10 +7,11 @@ class Server:
     def send(self, msg, to):
         
         # Send request
-        r = urequests.post(url = to, json = msg.toDict())
-        
-        # Attempt to parse response into haver message
         try:
+            # Send
+            r = urequests.post(url = to, json = msg.toDict())
+        
+            # Attempt to parse response into haver message
             json = r.json()
         except:
             return False
@@ -56,7 +57,7 @@ class Message:
     def toDict(self):
         output = {'wozzit': {'protocol': self.protocol, 'schema': self.schema, 'version': self.version}}
         if self.payload is not None:
-            output['payload'] = self.payload
+            output['wozzit']['payload'] = self.payload
         return output
 
     # Serialize this instance into JSON
